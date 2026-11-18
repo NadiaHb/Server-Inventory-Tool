@@ -1,4 +1,4 @@
-from meny import kor_meny, visa_alla, visa_miljospecifik, kontrollera_en
+from meny import kor_meny, visa_alla, visa_miljospecifik
 from lagring import las_in_servrar, exportera_som_csv
 from kontroller import kontrollera_server, kontrollera_alla
 import argparse
@@ -6,6 +6,7 @@ import sys
 
 def main():
 
+    #Creating arguments for terminal
     parser = argparse.ArgumentParser(
         description="Server Inventory Tool"
     )
@@ -20,36 +21,36 @@ def main():
         help="Visa miljöspecifik server"
     )
     parser.add_argument(
-        "--kontrollera-alla-servrar",
+        "--kontrollera-alla",
         action="store_true",
         help="Kontrollera alla servrar"
     )
     parser.add_argument(
-        "--kontrollera-en-server",
+        "--kontrollera",
         help="Kontrollera en server"
     )
     parser.add_argument(
-        "--exportera-som-csv",
+        "--export",
         action="store_true",
         help="Exportera server som csv"
     )
-    args = parser.parse_args()#reads argument user puts in terminal
-    servrar = las_in_servrar()#reads servers from the json file
+    args = parser.parse_args()
+    servrar = las_in_servrar()#reads servers from the JSON file
 
-    if args.lista:
-        if args.miljo:
-            visa_miljospecifik(servrar)
-        else:
-            visa_alla(servrar)
+    if args.miljo: #Show servers in specifik enviroment
+            visa_miljospecifik(servrar, args.miljo)
 
-    elif args.kontrollera_en_server:
+    elif args.lista: #Checking all servers
+        visa_alla(servrar)
+
+    elif args.kontrollera: #Checking only one server
         hittad = False
 
         for server in servrar:
-            if server["namn"] == args.kontrollera_en_server:
+            if server["namn"] == args.kontrollera:
                 kontrollera_server(server, servrar)
                 hittad = True
-                if server["Status"] == "down":
+                if server["status"] == "down":
                     sys.exit(1)
                 break
 
@@ -57,18 +58,18 @@ def main():
             print("Server hittades ej")
             sys.exit(1)
 
-    elif args.kontrollera_alla_servrar:
+    elif args.kontrollera_alla:#Checking all servers
         kontrollera_alla(servrar)
 
         for server in servrar:
-            if server["Status"] == "down":
+            if server["status"] == "down":
                 sys.exit(1)
 
-    elif args.exportera_som_csv:
+    elif args.export:#Exporting servers to CSV
         exportera_som_csv(servrar)
 
     else:
-        kor_meny(servrar)
+        kor_meny(servrar) #To start the menu with no arguments
 
 if __name__ == "__main__":
     main()

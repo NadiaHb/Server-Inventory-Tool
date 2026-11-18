@@ -37,7 +37,7 @@ lagring.py- Lagring läser in och sparar information till JSON och har hand om e
 
 status.py- Här finns funktioner för att kontrollera och visa status för seevers.
 
-test_status.py - test_status testar funktionerna i status.py
+print_status.py - print_status testar och skriver ut funktionen kontrollera_status i status.py
 
 kontroller.py- Kontrollerar om servrar svarar på ping och uppdaterar servrarna med information om när de sist kontrollerats.
 Funktionerna i kontroller.py används både av menyn men också från CLI. Logiken behöver alltså inte upprepas igen.
