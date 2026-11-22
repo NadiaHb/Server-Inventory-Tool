@@ -42,43 +42,42 @@ def kor_meny(servrar):
         else:
             print("Ogiltligt val")
 
+#Lists all servers in columns.
+def visa_lista(servrar):
+    print(f"{'Namn':<15} {'Adress':<15} {'Miljö':<10} {'Roll':<20} {'Status':<25}")
+
+    for server in servrar:
+        print(
+            f"{server['namn']:<15}" #Fixes widths
+            f"{server['adress']:<15}"
+            f"{server['miljo']:<10}"
+            f"{server['roll']:<20}"
+            f"{visa_status(server['status']):<25}"
+        )
+
 def visa_alla(servrar):
     print("--- Alla servrar ---")
 
     if len(servrar) == 0: #Checking if there are any servers
         print("Inga servrar hittades")
         return
-    #Fixes the widths in the column
-    print(f"{'Namn':<15} {'Adress':<20} {'Miljö':<10} {'Roll':<15} {'Status':<10}")
 
-    for server in servrar:
-        print(
-            f"{server['namn']:<15}"
-            f"{server['adress']:<20}"
-            f"{server['miljo']:<10}"
-            f"{server['roll']:<20}"
-            f"{visa_status(server['status']):<25}"
-        )
-
+    visa_lista(servrar)
 
 def visa_miljospecifik(servrar,miljo=None):
     if miljo is None:
         miljo = input("Ange miljön: dev/test/prod: ").strip()
 
     hittad = False
+    servrar_i_miljo = [] #Making a list for servers in the specific environment
 
     for server in servrar:
         if server["miljo"] == miljo:
-            print(
-                f"{server['namn']:<15} "
-                f"{server['adress']:<20} "
-                f"{server['miljo']:<10} "
-                f"{server['roll']:<15}"
-                f"{server['status']:<25}"
-            )
+            servrar_i_miljo.append(server)
             hittad = True
-
-    if not hittad:
+    if hittad:
+        visa_lista(servrar_i_miljo)
+    else:
         print("Ogiltligt val")
 
 

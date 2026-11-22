@@ -27,7 +27,7 @@ def kontrollera_server(server, servrar):
     except subprocess.TimeoutExpired:
         server["status"] = "down"
 
-    server["senast_kontrollerad"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    server["senast_kontrollerad"] = datetime.now().strftime("%Y-%m-%d %H:%M")
 
     spara_servrar(servrar)
     print(f"Server: {server['namn']} har status: {server['status']}")

@@ -22,7 +22,7 @@ def exportera_som_csv(servrar):
     Path("rapporter").mkdir(exist_ok=True)
 
     #Create filename with the current time and date
-    tid = datetime.now().strftime("%Y%m%d%H%M%S")
+    tid = datetime.now().strftime("%Y%m%d%H%M")
     filnamn = "rapporter/inventering_" + tid + ".csv"
 
 

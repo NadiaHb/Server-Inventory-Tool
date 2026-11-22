@@ -51,6 +51,7 @@ def main():
                 kontrollera_server(server, servrar)
                 hittad = True
                 if server["status"] == "down":
+
                     sys.exit(1)
                 break
 
