@@ -44,15 +44,15 @@ def kor_meny(servrar):
 
 #Lists all servers in columns.
 def visa_lista(servrar):
-    print(f"{'Namn':<15} {'Adress':<15} {'Miljö':<10} {'Roll':<20} {'Status':<25}")
+    print(f"{'Namn':<15} {'Adress':<15} {'Miljö':<15} {'Roll':<15} {'Status':<15}")
 
     for server in servrar:
         print(
             f"{server['namn']:<15}" #Fixes widths
             f"{server['adress']:<15}"
-            f"{server['miljo']:<10}"
-            f"{server['roll']:<20}"
-            f"{visa_status(server['status']):<25}"
+            f"{server['miljo']:<15}"
+            f"{server['roll']:<15}"
+            f"{visa_status(server['status']):<15}"
         )
 
 def visa_alla(servrar):
