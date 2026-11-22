@@ -62,7 +62,7 @@ def visa_alla(servrar):
         print("Inga servrar hittades")
         return
 
-    visa_lista(servrar)
+    visa_lista(servrar) #Using the pre-existing list function to avoid having to write list everytime needed.
 
 def visa_miljospecifik(servrar,miljo=None):
     if miljo is None:
